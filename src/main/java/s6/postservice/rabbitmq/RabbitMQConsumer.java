@@ -18,7 +18,13 @@ public class RabbitMQConsumer {
     public void consumeUserCreatedEvent(UserCreatedEvent userCreatedEvent) {
         // Save user data locally in post-service
         System.out.println("Received User Created Event: " + userCreatedEvent);
-        userDal.save(User.builder().id(userCreatedEvent.getId()).email(userCreatedEvent.getEmail()).build());
+        userDal.save(
+                User
+                        .builder()
+                        .id(userCreatedEvent.getId())
+                        .email(userCreatedEvent.getEmail())
+                        .build()
+        );
     }
     @RabbitListener(queues = "user-delete-queue")
     public void consumeUserDeletedEvent(UserDeletedEvent userDeletedEvent){
