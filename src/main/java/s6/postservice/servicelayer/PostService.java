@@ -20,7 +20,14 @@ public class PostService {
 
     public Post createPost(Post post) {
         Post createdPost = postDal.save(post);
-        PostCreatedEvent event = PostCreatedEvent.builder().id(createdPost.getId()).text(createdPost.getText()).build();
+        PostCreatedEvent event = PostCreatedEvent
+                .builder()
+                .id(createdPost.getId())
+                .text(createdPost.getText())
+                .createdAt(createdPost.getCreatedAt())
+                .userId(createdPost.getUserId())
+                .isBlocked(createdPost.getIsBlocked())
+                .build();
         rabbitMQProducer.sendPostCreatedEvent(event);
         return createdPost;
     }
