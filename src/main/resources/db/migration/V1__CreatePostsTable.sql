@@ -7,6 +7,14 @@ CREATE TABLE kwex_posts
     isBlocked bool,
     PRIMARY KEY (id)
 );
+create table kwex_relationships
+(
+    id        int         NOT NULL AUTO_INCREMENT,
+    senderId int not null,
+    receiverId int not null,
+    status varchar(20) not null,
+    PRIMARY KEY (id)
+);
 create table kwex_users
 (
   id int not null auto_increment,

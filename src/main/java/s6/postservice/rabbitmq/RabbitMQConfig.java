@@ -83,6 +83,26 @@ public class RabbitMQConfig {
         return BindingBuilder.bind(postDeleteQueue).to(postExchange).with("post.deleted");
     }
 
+    // friend-related configuration
+    @Bean
+    public TopicExchange friendExchange(){ return new TopicExchange("friend-exchange"); }
+
+    @Bean
+    public Queue friendCreateQueue(){ return new Queue("friend-create-queue"); }
+
+    @Bean
+    public Queue friendDeleteQueue(){ return new Queue("friend-delete-queue"); }
+
+    @Bean
+    public Binding bindingCreateFriend(Queue friendCreateQueue, TopicExchange friendExchange){
+        return BindingBuilder.bind(friendCreateQueue).to(friendExchange).with("friend.created");
+    }
+
+    @Bean
+    public Binding bindingDeleteFriend(Queue friendDeleteQueue, TopicExchange friendExchange){
+        return BindingBuilder.bind(friendDeleteQueue).to(friendExchange).with("friend.deleted");
+    }
+
     // Message converter for both exchanges
     @Bean
     public MessageConverter messageConverter() {
