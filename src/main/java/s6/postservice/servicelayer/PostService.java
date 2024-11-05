@@ -12,6 +12,7 @@ import s6.postservice.dto.UpdatePostRequest;
 import s6.postservice.dto.UpdatePostResponse;
 import s6.postservice.rabbitmq.RabbitMQProducer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,7 +54,7 @@ public class PostService {
         postDal.deleteById(postId);
     }
     public List<Post> getPostsHistoryForUserWithId(Integer userId){
-        List<Post> postsOrdered = postDal.findAll().stream().filter(p -> p.getUserId().equals(userId)).toList();
+        List<Post> postsOrdered = new ArrayList<>(postDal.findAll().stream().filter(p -> p.getUserId().equals(userId)).toList());
         postsOrdered.sort((p1, p2) -> p2.getCreatedAt().compareTo(p1.getCreatedAt()));
         return postsOrdered;
     }
@@ -66,7 +67,7 @@ public class PostService {
         List<Post> posts = postDal
                 .findAll()
                 .stream()
-                .filter(p -> friendsOfUser.contains(p.getUserId()))
+                .filter(p -> friendsOfUser.stream().anyMatch(f -> Objects.equals(f.getSenderId(), p.getUserId()) || Objects.equals(f.getReceiverId(), p.getUserId())))
                 .toList();
         return posts;
     }
