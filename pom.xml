@@ -148,6 +148,40 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version> <!-- Use the latest version -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/s6/postservice/servicelayer/*</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/s6/postservice/configuration/**/*</exclude>
+                                <exclude>**/s6/postservice/controller/**/*</exclude>
+                                <exclude>**/s6/postservice/datalayer/**/*</exclude>
+                                <exclude>**/s6/postservice/dto/**/*</exclude>
+                                <exclude>**/s6/postservice/rabbitmq/**/*</exclude>
+                                <exclude>**/s6/postservice/PostServiceApplication.java</exclude>
+                                <exclude>**/s6/postservice/servicelayer/customexceptions/**/*</exclude>
+                                <exclude>**/s6/postservice/servicelayer/token/**/*</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

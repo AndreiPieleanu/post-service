@@ -1,4 +1,4 @@
-package s6.postservice.servicelayer;
+package s6.postservice.servicelayer.token;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
