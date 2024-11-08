@@ -11,10 +11,12 @@ import s6.postservice.dto.PostUpdatedEvent;
 import s6.postservice.dto.UpdatePostRequest;
 import s6.postservice.dto.UpdatePostResponse;
 import s6.postservice.rabbitmq.RabbitMQProducer;
+import s6.postservice.servicelayer.customexceptions.PostNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -70,6 +72,13 @@ public class PostService {
                 .filter(p -> friendsOfUser.stream().anyMatch(f -> Objects.equals(f.getSenderId(), p.getUserId()) || Objects.equals(f.getReceiverId(), p.getUserId())))
                 .toList();
         return posts;
+    }
+    public Post getPostById(Integer postId){
+        Optional<Post> post = postDal.findById(postId);
+        if(post.isEmpty()){
+            throw new PostNotFoundException();
+        }
+        return post.get();
     }
 
 }

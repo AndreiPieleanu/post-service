@@ -56,6 +56,12 @@ public class PostController {
     public ResponseEntity<List<Post>> getPostsOfUserWithId(@PathVariable Integer userId){
         return new ResponseEntity<>(postService.getPostsOfUserWithId(userId), HttpStatus.OK);
     }
+    @GetMapping("/myposts/{postId}")
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_USER", "ROLE_ADMIN", "ROLE_MODERATOR"})
+    public ResponseEntity<Post> getPostById(@PathVariable Integer postId){
+        return new ResponseEntity<>(postService.getPostById(postId), HttpStatus.OK);
+    }
 
     @DeleteMapping("/{postId}")
     @IsAuthenticated

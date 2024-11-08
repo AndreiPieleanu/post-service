@@ -13,10 +13,13 @@ import s6.postservice.dto.UpdatePostRequest;
 import s6.postservice.dto.UpdatePostResponse;
 import s6.postservice.rabbitmq.RabbitMQProducer;
 import s6.postservice.servicelayer.PostService;
+import s6.postservice.servicelayer.customexceptions.PostNotFoundException;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -201,5 +204,32 @@ public class PostServiceTest {
         assertEquals(1, result.size());
         verify(friendsRelationshipDal, times(1)).findAll();
         verify(postDal, times(1)).findAll();
+    }
+
+    @Test
+    public void testGetPost_Success(){
+        Post post = Post.builder().id(1).text("My post").userId(1).createdAt(new Date()).build();
+        when(postDal.findById(post.getId())).thenReturn(Optional.of(post));
+
+        Post retrievedPost = postService.getPostById(1);
+
+        assertEquals(post, retrievedPost);
+    }
+
+    @Test
+    public void testGetPost_Exception(){
+        Post post = Post.builder().id(1).text("My post").userId(1).createdAt(new Date()).build();
+        when(postDal.findById(post.getId())).thenReturn(Optional.empty());
+        Exception ex = null;
+
+        try{
+            postService.getPostById(1);
+        }
+        catch (Exception e){
+            ex = e;
+        }
+
+        assertNotNull(ex);
+        assertInstanceOf(PostNotFoundException.class, ex);
     }
 }
