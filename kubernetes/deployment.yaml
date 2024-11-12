@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-service
+  labels:
+    app: post-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: post-service
+  template:
+    metadata:
+      labels:
+        app: post-service
+    spec:
+      containers:
+        - name: post-service-container
+          image: trainingtexas/post-service:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"  # If applicable
+          resources:
+            limits:
+              memory: "300Mi"
+              cpu: "200m"
+            requests:
+              memory: "128Mi"
+              cpu: "200m"
