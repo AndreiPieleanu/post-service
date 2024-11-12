@@ -21,3 +21,6 @@ create table kwex_users
   email varchar(100) NOT NULL,
   primary key (id)
 );
+CREATE INDEX idx_userId ON kwex_posts (userId);
+CREATE INDEX idx_text on kwex_posts(text);
+CREATE INDEX idx_createdAt ON kwex_posts (createdAt);
