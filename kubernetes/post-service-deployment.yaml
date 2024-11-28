@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - image: trainingtexas/post-service:latest
-          name: post-service-container
+          name: post-service
           ports:
             - containerPort: 8084
               protocol: TCP
