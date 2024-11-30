@@ -31,6 +31,6 @@ spec:
           image: mysql:8.0
           name: post-service-mysql
           ports:
-            - containerPort: 3308
+            - containerPort: 3306
               protocol: TCP
       restartPolicy: Always
