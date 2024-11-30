@@ -24,13 +24,18 @@ spec:
         - env:
             - name: MYSQL_DATABASE
               value: post-service
+            - name: MYSQL_USER
+              value: root
             - name: MYSQL_PASSWORD
               value: admin
-            - name: MYSQL_post
-              value: root
+            - name: MYSQL_ROOT_PASSWORD
+              value: admin
           image: mysql:8.0
           name: post-service-mysql
           ports:
             - containerPort: 3306
               protocol: TCP
       restartPolicy: Always
+      volumes:
+        - name: mysql-data
+          emptyDir: {} # Use Persistent Volume for production
