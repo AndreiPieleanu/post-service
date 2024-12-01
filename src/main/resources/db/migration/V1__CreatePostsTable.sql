@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS `post-service`;
-USE `post-service`;
 CREATE TABLE kwex_posts
 (
     id        int         NOT NULL AUTO_INCREMENT,
