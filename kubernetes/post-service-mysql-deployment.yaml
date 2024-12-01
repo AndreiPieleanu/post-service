@@ -34,5 +34,6 @@ spec:
               mountPath: /var/lib/mysql
       restartPolicy: Always
       volumes:
-        - name: mysql-data
-          emptyDir: {} # Use Persistent Volume for production
+        - name: mysql-init
+          configMap:
+              name: post-service-mysql-init
