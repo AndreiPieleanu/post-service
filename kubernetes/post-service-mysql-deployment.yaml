@@ -27,13 +27,12 @@ spec:
           image: mysql:8.0
           name: post-service-mysql
           ports:
-            - containerPort: 3308
+            - containerPort: 3306
               protocol: TCP
           volumeMounts:
             - name: mysql-data
               mountPath: /var/lib/mysql
       restartPolicy: Always
       volumes:
-        - name: mysql-init
-          configMap:
-              name: post-service-mysql-init
+        - name: mysql-data
+          emptyDir: {} # Use Persistent Volume for production

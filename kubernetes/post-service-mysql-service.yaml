@@ -9,8 +9,8 @@ metadata:
   name: post-service-mysql
 spec:
   ports:
-    - name: "3308"
-      port: 3308
-      targetPort: 3308
+    - name: "3306"
+      port: 3306
+      targetPort: 3306
   selector:
     io.kompose.service: post-service-mysql
