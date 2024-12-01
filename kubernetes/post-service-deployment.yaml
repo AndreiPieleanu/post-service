@@ -25,7 +25,7 @@ spec:
             - name: SPRING_DATASOURCE_PASSWORD
               value: admin
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://post-service-mysql:3306/post-service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+              value: jdbc:mysql://post-service-mysql:3308/post-service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
             - name: SPRING_DATASOURCE_NAME
               value: root
           image: trainingtexas/post-service:latest
