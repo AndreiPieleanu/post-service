@@ -6,7 +6,6 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -29,10 +28,10 @@ public class Post {
     @NotNull
     private String text;
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(name="createdAt", updatable = false)
     private Date createdAt;
-    @Column
+    @Column(name = "userId")
     private Integer userId;
-    @Column
+    @Column(name = "isBlocked")
     private Boolean isBlocked = false;
 }

@@ -23,11 +23,11 @@ spec:
       containers:
         - env:
             - name: SPRING_DATASOURCE_PASSWORD
-              value: admin
+              value: app_password
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://post-service-mysql:3308/post_service
-            - name: SPRING_DATASOURCE_NAME
-              value: root
+              value: jdbc:mysql://post-service-mysql:3306/post_service
+            - name: SPRING_DATASOURCE_USERNAME
+              value: app_user
           image: trainingtexas/post-service:latest
           name: post-service
           ports:
