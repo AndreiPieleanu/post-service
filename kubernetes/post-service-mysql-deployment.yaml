@@ -32,7 +32,20 @@ spec:
           volumeMounts:
             - name: mysql-data
               mountPath: /var/lib/mysql
+            - name: mysql-init-scripts
+              mountPath: /docker-entrypoint-initdb.d
       restartPolicy: Always
       volumes:
         - name: mysql-data
           emptyDir: {} # Use Persistent Volume for production
+        - name: mysql-init-scripts
+          configMap:
+            name: post-service-mysql-init
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: post-service-mysql-init
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS post_service;
