@@ -34,10 +34,10 @@ spec:
             - containerPort: 3306
               protocol: TCP
           volumeMounts:
-            - name: mysql-data
+            - name: mysql-data-post
               mountPath: /var/lib/mysql
       restartPolicy: Always
       volumes:
-        - name: mysql-data
+        - name: mysql-data-post
           persistentVolumeClaim:
-            claimName: mysql-pvc
+            claimName: mysql-pvc-post
