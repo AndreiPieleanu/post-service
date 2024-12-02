@@ -5,12 +5,12 @@ metadata:
     kompose.cmd: C:\Users\Andrei\go\bin\kompose.exe convert -f docker-compose.yml
     kompose.version: 1.34.0 (HEAD)
   labels:
-    io.kompose.service: post-service-mysql
-  name: post-service-mysql
+    io.kompose.service: mysql
+  name: mysql
 spec:
   ports:
-    - name: "3308"
-      port: 3308
-      targetPort: 3308
+    - name: "3306"
+      port: 3306
+      targetPort: 3306
   selector:
-    io.kompose.service: post-service-mysql
+    io.kompose.service: mysql
